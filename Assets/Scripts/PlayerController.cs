@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour
         // Attack, Enemy and co (StartCoroutine) should not be null
         if (co != null && enemy != null && Vector3.Distance(enemy.transform.position, transform.position) < 2f)
         {
-
+            Debug.Log(gameObject.GetInstanceID().ToString());
+            enemy.GetComponent<EnemyController>().attackerPlayer[gameObject.GetInstanceID().ToString()] = transform;
             characterStat.Attack(enemy.GetComponent<CharacterStat>());
         }
 
