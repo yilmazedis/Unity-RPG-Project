@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
             if (co != null)
             {
                 StopCoroutine(co);
+                if (enemy != null && enemy.GetComponent<EnemyController>().attackerPlayer.Count != 0)
+                {   
+                    // TODO: check if instance id doesnt exist.
+                    enemy.GetComponent<EnemyController>().attackerPlayer.Remove(gameObject.GetInstanceID().ToString());
+                }
                 enemy = null;
             }
         }

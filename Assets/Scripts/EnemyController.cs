@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
 
                 StopCoroutine(co);
 
-                if (Vector3.Distance(player.transform.position, transform.position) < 2f)
+                if (attackerPlayer.Count == 0 && Vector3.Distance(player.transform.position, transform.position) < 2f)
                 {
 
                     characterStat.Attack(player.GetComponent<CharacterStat>());
