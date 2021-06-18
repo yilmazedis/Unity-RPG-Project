@@ -45,6 +45,7 @@ public class EnemyController : MonoBehaviour
 
                 StopCoroutine(co);
 
+                // if player do not attack, enemy intent to attack player by default
                 if (attackerPlayer.Count == 0 && Vector3.Distance(player.transform.position, transform.position) < 2f)
                 {
 

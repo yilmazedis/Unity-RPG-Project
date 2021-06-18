@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private CharacterStat characterStat;
     NavMeshAgent agent;
     Coroutine co;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,6 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         characterStat = GetComponent<CharacterStat>();
         agent = GetComponent<NavMeshAgent>();
-
-
     }
 
     // Update is called once per frame

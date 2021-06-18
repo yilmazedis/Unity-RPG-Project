@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         healthbar = GetComponent<Image>();
+        healthbar.fillAmount = 1f;
     }
     public void UpdateHealth(float fraction)
     {

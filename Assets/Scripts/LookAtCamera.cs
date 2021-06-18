@@ -5,12 +5,17 @@ using UnityEngine;
 public class LookAtCamera : MonoBehaviour
 {
 
-    Transform perspective;   
-    
-    // Update is called once per frame
-    void Update()
+    Transform perspective;
+    private Camera targetCamera;
+
+    void Start()
     {
-       
-        transform.LookAt(Camera.main.transform);
+        targetCamera = Camera.main;    
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        transform.rotation = targetCamera.transform.rotation;
     }
 }

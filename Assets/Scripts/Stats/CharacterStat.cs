@@ -61,5 +61,13 @@ public class CharacterStat : MonoBehaviour
         // Die in some way
 
         Debug.Log(transform.name + " died.");
+        //StartCoroutine("Respawn", 2f);
+    }
+
+    IEnumerator Respawn(float spawnDelay)
+    {
+        yield return new WaitForSeconds(spawnDelay);
+        //transform = initialPosition;
+        gameObject.SetActive(true);
     }
 }
