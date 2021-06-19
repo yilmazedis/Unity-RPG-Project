@@ -24,7 +24,14 @@ public class LifeCycleManager : MonoBehaviour
 
     public void RespawnEnemy()
     {
+        StartCoroutine(example());
+    }
 
+    IEnumerator example()
+    {
+
+        yield return new WaitForSeconds(3f);
         Instantiate(enemy, enemySpawnPosition, Quaternion.identity);
+
     }
 }

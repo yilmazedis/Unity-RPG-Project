@@ -86,7 +86,7 @@ public class EnemyController : MonoBehaviour
 
         if (maxDealtDamagePlayer != null)
         {
-            Debug.Log("maxDealtDamagePlayer: " + maxDealtDamagePlayer.tag + " " + maxDealtDamagePlayer.GetComponent<CharacterStat>().damage.GetValue());
+            //Debug.Log("maxDealtDamagePlayer: " + maxDealtDamagePlayer.tag + " " + maxDealtDamagePlayer.GetComponent<CharacterStat>().damage.GetValue());
             characterStat.Attack(maxDealtDamagePlayer.GetComponent<CharacterStat>());
         }
         else

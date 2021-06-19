@@ -13,7 +13,6 @@ public class CharacterStat : MonoBehaviour
     public Stat attackSpeed;
 
     private float attackCooldown = 0f;
-
     public HealthBar healthBar;
 
     private void Awake()
@@ -53,7 +52,6 @@ public class CharacterStat : MonoBehaviour
             targetStat.TakeDamage(damage.GetValue());
             attackCooldown = 1f / attackSpeed.GetValue();
         }
-        
     }
 
     public virtual void Die()

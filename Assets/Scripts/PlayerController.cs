@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.Log("We hit " + hit.collider.name + " " + hit.point);
+                //Debug.Log("We hit " + hit.collider.name + " " + hit.point);
                 motor.MoveToPoint(hit.point);
             }
 
@@ -61,13 +61,13 @@ public class PlayerController : MonoBehaviour
                 
                 Transform selected = hit.transform;
 
-                Debug.Log("We hit tag " + hit.transform.tag + " " + hit.point);
+                //Debug.Log("We hit tag " + hit.transform.tag + " " + hit.point);
 
                 // if selected target is enemy start attack
-                if (selected.transform.tag == "Enemy")
+                if (enemy == null && selected.transform.tag == "Enemy")
                 {
                     enemy = selected;
-                    co = StartCoroutine(Chase(selected.position));
+                    co = StartCoroutine(Chase(enemy));
                 }
             }
         }
@@ -75,18 +75,18 @@ public class PlayerController : MonoBehaviour
         // Attack, Enemy and co (StartCoroutine) should not be null
         if (co != null && enemy != null && Vector3.Distance(enemy.transform.position, transform.position) < 2f)
         {
-            Debug.Log(gameObject.GetInstanceID().ToString());
+            //Debug.Log(gameObject.GetInstanceID().ToString());
             enemy.GetComponent<EnemyController>().attackerPlayer[gameObject.GetInstanceID().ToString()] = transform;
-            characterStat.Attack(enemy.GetComponent<CharacterStat>());
+            characterStat.Attack(enemy.GetComponent<CharacterStat>()); // TODO: Attack may not need parameters
         }
 
     }
 
-    IEnumerator Chase(Vector3 position)
+    IEnumerator Chase(Transform enemy)
     {
-        while (true)
+        while (enemy != null)
         {
-            agent.destination = position;
+            agent.destination = enemy.position;
             yield return new WaitForSeconds(0.1f);
         }
 
