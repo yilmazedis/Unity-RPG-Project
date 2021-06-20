@@ -156,6 +156,8 @@ MonoBehaviour:
     baseValue: 1
   attackSpeed:
     baseValue: 1
+  HealtRegen:
+    baseValue: 2
   healthBar: {fileID: 341963400231501625}
 --- !u!1 &341963400231501629
 GameObject:

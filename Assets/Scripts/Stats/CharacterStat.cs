@@ -11,6 +11,7 @@ public class CharacterStat : MonoBehaviour
     public Stat armor;
     public Stat attackRange;
     public Stat attackSpeed;
+    public Stat HealtRegen;
 
     private float attackCooldown = 0f;
     public HealthBar healthBar;
@@ -18,6 +19,11 @@ public class CharacterStat : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(HealthRegeneration());
     }
 
     private void Update()
@@ -36,7 +42,7 @@ public class CharacterStat : MonoBehaviour
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         currentHealth -= damage;
 
-        healthBar.UpdateHealth((float)currentHealth / (float)maxHealth);
+        UpdateHealtBar();
         Debug.Log(transform.name + " take" + damage + " damage.");
 
         if (currentHealth <= 0)
@@ -62,10 +68,34 @@ public class CharacterStat : MonoBehaviour
         //StartCoroutine("Respawn", 2f);
     }
 
+    void UpdateHealtBar()
+    {
+        healthBar.UpdateHealth((float)currentHealth / (float)maxHealth);
+    }
+
     IEnumerator Respawn(float spawnDelay)
     {
         yield return new WaitForSeconds(spawnDelay);
         //transform = initialPosition;
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+    }
+
+    IEnumerator HealthRegeneration()
+    {
+        while (true)
+        {
+            if (currentHealth < maxHealth)
+            {
+                currentHealth += HealtRegen.GetValue();
+
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                UpdateHealtBar();
+                Debug.Log("Health Regen");
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

@@ -64,26 +64,6 @@ public class EnemyController : MonoBehaviour
 
         Transform maxDealtDamagePlayer = FindMaxDamageDealtPlayer(attackerPlayer);
 
-
-
-        //foreach (Transform item in attackerPlayer.Values)
-        //{
-        //    Debug.Log("Player damages: " + item.GetComponent<CharacterStat>().damage.GetValue());
-        //}
-
-        //Debug.Log("   ------------   ");
-
-        //if (Vector3.Distance(player.transform.position, transform.position) < 2f)
-        //{
-
-        //    characterStat.Attack(player.GetComponent<CharacterStat>());
-        //}
-
-
-        //ArrayList players = TriggerObjectWithInBound(2f, "Player");
-
-        //Collider maxDealtDamagePlayer = FindMaxDamageDealtPlayer(players);
-
         if (maxDealtDamagePlayer != null)
         {
             //Debug.Log("maxDealtDamagePlayer: " + maxDealtDamagePlayer.tag + " " + maxDealtDamagePlayer.GetComponent<CharacterStat>().damage.GetValue());
@@ -129,22 +109,6 @@ public class EnemyController : MonoBehaviour
 
         return maxDealtDamagePlayer;
     }
-
-    //Collider FindMaxDamageDealtPlayer(ArrayList players)
-    //{
-    //    Collider maxDealtDamagePlayer = null;
-    //    int maxDamage = 0;
-
-    //    foreach (Collider player in players) {
-    //        if (player.GetComponent<CharacterStat>().damage.GetValue() > maxDamage)
-    //        {
-    //            maxDamage = player.GetComponent<CharacterStat>().damage.GetValue();
-    //            maxDealtDamagePlayer = player;
-    //        }
-    //    }
-
-    //    return maxDealtDamagePlayer;
-    //}
 
     IEnumerator WalkAround()
     {
