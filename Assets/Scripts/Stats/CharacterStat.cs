@@ -16,9 +16,13 @@ public class CharacterStat : MonoBehaviour
     private float attackCooldown = 0f;
     public HealthBar healthBar;
 
+    ParticleSystem particles;
+
     private void Awake()
     {
         currentHealth = maxHealth;
+        particles = GetComponentInChildren<ParticleSystem>();
+        particles.Stop();
     }
 
     private void Start()
@@ -44,6 +48,11 @@ public class CharacterStat : MonoBehaviour
 
         UpdateHealtBar();
         Debug.Log(transform.name + " take" + damage + " damage.");
+
+        
+
+        if (particles.isStopped)
+            particles.Play();
 
         if (currentHealth <= 0)
         {

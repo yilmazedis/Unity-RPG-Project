@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
             characterStat.Attack(enemy.GetComponent<CharacterStat>()); // TODO: Attack may not need parameters
         }
 
+        // you should be able to attack other enemy while on attack an enemy
+
     }
 
     IEnumerator Chase(Transform enemy)
