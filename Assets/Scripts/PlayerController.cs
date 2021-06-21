@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
                     enemy = selected;
                     co = StartCoroutine(Chase(enemy));
                 }
+
+                if (enemy != null && selected.transform.tag == "Enemy")
+                {
+                    StopCoroutine(co);
+
+                    enemy = selected;
+                    co = StartCoroutine(Chase(enemy));
+                }
             }
         }
 
@@ -80,7 +88,7 @@ public class PlayerController : MonoBehaviour
             characterStat.Attack(enemy.GetComponent<CharacterStat>()); // TODO: Attack may not need parameters
         }
 
-        // you should be able to attack other enemy while on attack an enemy
+        // you should be able to attack other enemy while on attack an enemy.
 
     }
 

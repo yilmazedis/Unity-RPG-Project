@@ -502,7 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  attackEffect: {fileID: 8007925334986872004, guid: 10fbe91adbe0db54089cbfee778ebb8e, type: 3}
   damage:
     baseValue: 5
   armor:

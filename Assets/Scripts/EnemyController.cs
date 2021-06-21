@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     Vector3 basePosition;
     private Transform player;
     public float lookRadius = 4f;
+    public float attakRadius = 2f;
     private CharacterStat characterStat;
     public Dictionary<string, Transform> attackerPlayer = new Dictionary<string, Transform>();
     Coroutine co;
@@ -46,7 +47,7 @@ public class EnemyController : MonoBehaviour
                 StopCoroutine(co);
 
                 // if player do not attack, enemy intent to attack player by default
-                if (attackerPlayer.Count == 0 && Vector3.Distance(player.transform.position, transform.position) < 2f)
+                if (attackerPlayer.Count == 0 && Vector3.Distance(player.transform.position, transform.position) < attakRadius)
                 {
 
                     characterStat.Attack(player.GetComponent<CharacterStat>());
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
 
         Transform maxDealtDamagePlayer = FindMaxDamageDealtPlayer(attackerPlayer);
 
-        if (maxDealtDamagePlayer != null)
+        if (maxDealtDamagePlayer != null && Vector3.Distance(maxDealtDamagePlayer.position, transform.position) < attakRadius)
         {
             //Debug.Log("maxDealtDamagePlayer: " + maxDealtDamagePlayer.tag + " " + maxDealtDamagePlayer.GetComponent<CharacterStat>().damage.GetValue());
             characterStat.Attack(maxDealtDamagePlayer.GetComponent<CharacterStat>());
