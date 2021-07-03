@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
                     co = StartCoroutine(Chase(enemy));
                 }
 
-                if (enemy != null && selected.transform.tag == "Enemy")
+                if (enemy != null && selected.transform.tag == "Enemy") // it should be test more
                 {
                     StopCoroutine(co);
 
@@ -88,7 +88,9 @@ public class PlayerController : MonoBehaviour
             characterStat.Attack(enemy.GetComponent<CharacterStat>()); // TODO: Attack may not need parameters
         }
 
-        // you should be able to attack other enemy while on attack an enemy.
+        // you should be able to attack other enemy while on attack an enemy. +
+        // level system
+        // object enter inside each other
 
     }
 

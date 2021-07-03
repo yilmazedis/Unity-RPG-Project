@@ -12,8 +12,7 @@ public class LifeCycleManager : MonoBehaviour
     private void Start()
     {
         playerSpawnPosition = new Vector3(12f, 1.25f, -12f);
-        enemySpawnPosition = new Vector3(0, 1.25f, 0);
-        
+        enemySpawnPosition = new Vector3(0, 1.25f, 0);  
     }
 
     public void RespawnPlayer()
@@ -24,10 +23,10 @@ public class LifeCycleManager : MonoBehaviour
 
     public void RespawnEnemy()
     {
-        StartCoroutine(example());
+        StartCoroutine(RespawnEnemyCoroutine());
     }
 
-    IEnumerator example()
+    IEnumerator RespawnEnemyCoroutine()
     {
 
         yield return new WaitForSeconds(3f);

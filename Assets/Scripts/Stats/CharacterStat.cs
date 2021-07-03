@@ -16,7 +16,7 @@ public class CharacterStat : MonoBehaviour
     private float attackCooldown = 0f;
     public HealthBar healthBar;
 
-    ParticleSystem particles;
+    protected ParticleSystem particles;
 
     private void Awake()
     {
@@ -27,44 +27,48 @@ public class CharacterStat : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(HealthRegeneration());
+        //StartCoroutine(HealthRegeneration());  // later open it
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(10);
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    TakeDamage(10);
+        //}
 
         attackCooldown -= Time.deltaTime;
     }
 
-    public void TakeDamage (int damage)
+    public virtual void TakeDamage (ref int damage, Transform attacker)
     {
+
+        if (currentHealth <= 0)
+            return;
+
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
+
+        if (currentHealth < damage)
+            damage = currentHealth;
+
         currentHealth -= damage;
 
         UpdateHealtBar();
-        Debug.Log(transform.name + " take" + damage + " damage.");
+        //Debug.Log(transform.name + " take: " + damage + " damage.");
 
         
 
         if (particles.isStopped)
-            particles.Play();
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+            particles.Play(); //TODO: make it more efficient
     }
 
     public void Attack(CharacterStat targetStat)
     {
         if (attackCooldown <= 0f) 
         {
-            targetStat.TakeDamage(damage.GetValue());
+            int damageVal = damage.GetValue();
+            targetStat.TakeDamage(ref damageVal, transform);
             attackCooldown = 1f / attackSpeed.GetValue();
         }
     }
@@ -102,7 +106,7 @@ public class CharacterStat : MonoBehaviour
                     currentHealth = maxHealth;
                 }
                 UpdateHealtBar();
-                Debug.Log("Health Regen");
+                //Debug.Log("Health Regen");
             }
             yield return new WaitForSeconds(1f);
         }
