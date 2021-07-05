@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 4
+  attakRadius: 2
 --- !u!114 &821066066557360229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage:
-    baseValue: 5
+    baseValue: 3
   armor:
     baseValue: 1
   attackRange:
@@ -513,6 +514,7 @@ MonoBehaviour:
   HealtRegen:
     baseValue: 2
   healthBar: {fileID: 821066066440256577}
+  targetExperience: 60
 --- !u!1001 &821066065799379816
 PrefabInstance:
   m_ObjectHideFlags: 0

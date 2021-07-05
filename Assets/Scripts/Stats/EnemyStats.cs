@@ -7,9 +7,9 @@ public class EnemyStats : CharacterStat
 {
 
     private LifeCycleManager enemyLife;
-    public int targetExperience = 100;
+    public int targetExperience = 60;
 
-    public Dictionary<string, int> attackerPlayer = new Dictionary<string, int>();
+    public Dictionary<Transform, int> attackerPlayer = new Dictionary<Transform, int>();
     Mutex mutex = new Mutex();
 
     public override void TakeDamage(ref int damage, Transform attacker)
@@ -19,15 +19,15 @@ public class EnemyStats : CharacterStat
         base.TakeDamage(ref damage, attacker);
         mutex.ReleaseMutex();
 
-        if (!attackerPlayer.ContainsKey(attacker.name))
+        if (!attackerPlayer.ContainsKey(attacker))
         {
-            attackerPlayer[attacker.name] = damage;
+            attackerPlayer[attacker] = damage;
         } else
         {
-            attackerPlayer[attacker.name] += damage;
+            attackerPlayer[attacker] += damage;
         }
 
-        Debug.Log("Attacker player: " + attackerPlayer[attacker.name] + ", Damage: ");
+        Debug.Log("Attacker player: " + attacker.tag + ", Damage: " + attackerPlayer[attacker]);
 
         if (currentHealth <= 0)
         {
@@ -42,7 +42,9 @@ public class EnemyStats : CharacterStat
 
         foreach (var player in attackerPlayer)
         {
-            Debug.Log("Attacker player: " + player + ", Damage: " + player.Value);
+            Debug.Log("Attacker player: " + player.Key.tag + ", Damage: " + player.Value + " " + (targetExperience * player.Value) / 100);
+
+            player.Key.GetComponent<PlayerStat>().gainedExperience((targetExperience * player.Value) / 100);
         }
 
         Destroy(gameObject);

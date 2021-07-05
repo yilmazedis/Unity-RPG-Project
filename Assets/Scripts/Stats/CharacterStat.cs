@@ -7,11 +7,11 @@ public class CharacterStat : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth { get; private set; }
 
-    public Stat damage;
-    public Stat armor;
-    public Stat attackRange;
-    public Stat attackSpeed;
-    public Stat HealtRegen;
+    public Stat damage; // stat
+    public Stat armor; // stat
+    public Stat attackRange; // stat
+    public Stat attackSpeed; // stat
+    public Stat HealtRegen; // stat
 
     private float attackCooldown = 0f;
     public HealthBar healthBar;
