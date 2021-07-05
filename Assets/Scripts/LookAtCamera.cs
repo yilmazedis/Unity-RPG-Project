@@ -16,6 +16,8 @@ public class LookAtCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.rotation = targetCamera.transform.rotation;
+        //transform.rotation = targetCamera.transform.rotation;
+
+        transform.eulerAngles = new Vector3(55f, 0f, 0f);
     }
 }
