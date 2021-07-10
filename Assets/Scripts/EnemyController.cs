@@ -101,9 +101,9 @@ public class EnemyController : MonoBehaviour
 
         foreach (Transform player in players.Values)
         {
-            if (player.GetComponent<CharacterStat>().damage.GetValue() > maxDamage)
+            if (player.GetComponent<CharacterStat>().stats.damage.GetValue() > maxDamage)
             {
-                maxDamage = player.GetComponent<CharacterStat>().damage.GetValue();
+                maxDamage = player.GetComponent<CharacterStat>().stats.damage.GetValue();
                 maxDealtDamagePlayer = player;
             }
         }

@@ -1,33 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStat : MonoBehaviour
 {
-    public int maxHealth = 100;
     public int currentHealth { get; private set; }
 
-    public Stat damage; // stat
-    public Stat armor; // stat
-    public Stat attackRange; // stat
-    public Stat attackSpeed; // stat
-    public Stat HealtRegen; // stat
+    public Stats stats;
 
     private float attackCooldown = 0f;
     public HealthBar healthBar;
+
+    public Text levelText;
 
     protected ParticleSystem particles;
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = stats.maxHealth.GetValue();
         particles = GetComponentInChildren<ParticleSystem>();
         particles.Stop();
     }
 
     private void Start()
     {
-        //StartCoroutine(HealthRegeneration());  // later open it
+        StartCoroutine(HealthRegeneration());  //TODO: later open it
+        levelText.text = "1"; // TODO: connect with database
     }
 
     private void Update()
@@ -46,7 +45,7 @@ public class CharacterStat : MonoBehaviour
         if (currentHealth <= 0)
             return;
 
-        damage -= armor.GetValue();
+        damage -= stats.armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         if (currentHealth < damage)
@@ -67,9 +66,9 @@ public class CharacterStat : MonoBehaviour
     {
         if (attackCooldown <= 0f) 
         {
-            int damageVal = damage.GetValue();
+            int damageVal = stats.damage.GetValue();
             targetStat.TakeDamage(ref damageVal, transform);
-            attackCooldown = 1f / attackSpeed.GetValue();
+            attackCooldown = 1f / stats.attackSpeed.GetValue();
         }
     }
 
@@ -83,7 +82,7 @@ public class CharacterStat : MonoBehaviour
 
     void UpdateHealtBar()
     {
-        healthBar.UpdateHealth((float)currentHealth / (float)maxHealth);
+        healthBar.UpdateHealth((float)currentHealth / (float)stats.maxHealth.GetValue());
     }
 
     IEnumerator Respawn(float spawnDelay)
@@ -93,17 +92,17 @@ public class CharacterStat : MonoBehaviour
         //gameObject.SetActive(true);
     }
 
-    IEnumerator HealthRegeneration()
+    protected IEnumerator HealthRegeneration()
     {
         while (true)
         {
-            if (currentHealth < maxHealth)
+            if (currentHealth < stats.maxHealth.GetValue())
             {
-                currentHealth += HealtRegen.GetValue();
+                currentHealth += stats.healtRegen.GetValue();
 
-                if (currentHealth > maxHealth)
+                if (currentHealth > stats.maxHealth.GetValue())
                 {
-                    currentHealth = maxHealth;
+                    currentHealth = stats.maxHealth.GetValue();
                 }
                 UpdateHealtBar();
                 //Debug.Log("Health Regen");

@@ -24,3 +24,16 @@ public class Stat
         baseValue += value;
     }
 }
+
+[System.Serializable]
+public class Stats
+{
+    public string name;
+    public Stat maxHealth;
+    public Stat damage; // stat
+    public Stat armor; // stat
+    public Stat attackRange; // stat
+    public Stat attackSpeed; // stat
+    public Stat healtRegen; // stat,
+    public Stat level;
+}
